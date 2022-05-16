@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\SearchController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -15,6 +16,12 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
+});
+
+Route::middleware(['auth'])->group(function (): void {
+    Route::view('/dashboard', 'dashboard')->name('dashboard');
+    Route::get('/search', SearchController::class)->name('search');
+    Route::post('/search', SearchController::class);
 });
 
 Route::get('/dashboard', function () {
