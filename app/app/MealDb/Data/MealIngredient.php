@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Services\MealDb\Data;
+namespace App\MealDb\Data;
 
 use Spatie\DataTransferObject\DataTransferObject;
 

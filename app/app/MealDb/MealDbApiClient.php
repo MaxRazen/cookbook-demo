@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Services\MealDb;
+namespace App\MealDb;
 
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\GuzzleException;

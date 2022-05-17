@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Services\MealDb\MealDbRepository;
+use App\MealDb\MealDbRepository;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 

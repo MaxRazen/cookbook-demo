@@ -2,9 +2,9 @@
 
 namespace Tests\Unit\MealDb;
 
-use App\Services\MealDb\Data\MealIngredient;
-use App\Services\MealDb\Data\SearchResultItem;
-use App\Services\MealDb\Transformers\SearchResultTransformer;
+use App\MealDb\Data\MealIngredient;
+use App\MealDb\Data\SearchResultItem;
+use App\MealDb\Transformers\SearchResultTransformer;
 use PHPUnit\Framework\TestCase;
 use Tests\Mixins\InteractWithMealDbEntities;
 
@@ -12,7 +12,7 @@ class SearchResultTransformerTest extends TestCase
 {
     use InteractWithMealDbEntities;
 
-    public function test_transformer(): void
+    public function testSearchResultTransformerClass(): void
     {
         $transformer = new SearchResultTransformer();
 

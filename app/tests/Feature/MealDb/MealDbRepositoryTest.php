@@ -2,9 +2,9 @@
 
 namespace Tests\Feature\MealDb;
 
-use App\Services\MealDb\Data\SearchResultItem;
-use App\Services\MealDb\MealDbApiClient;
-use App\Services\MealDb\MealDbRepository;
+use App\MealDb\Data\SearchResultItem;
+use App\MealDb\MealDbApiClient;
+use App\MealDb\MealDbRepository;
 use Illuminate\Support\Collection;
 use Mockery;
 use Mockery\MockInterface;
@@ -15,7 +15,7 @@ class MealDbRepositoryTest extends TestCase
 {
     use InteractWithMealDbEntities;
 
-    public function test_search_method(): void
+    public function testSearch(): void
     {
         $this->instance(
             MealDbApiClient::class,

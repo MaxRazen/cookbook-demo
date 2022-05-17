@@ -8,10 +8,10 @@ use GuzzleHttp\HandlerStack;
 
 trait InteractWithHttpClient
 {
-    public function mockHttpClient(array $handlers): void
+    public function mockHttpClient(array $responses): void
     {
-        $this->app->bind(Client::class, function () use ($handlers) {
-            $mock = new MockHandler($handlers);
+        $this->app->bind(Client::class, function () use ($responses) {
+            $mock = new MockHandler($responses);
 
             $handler = HandlerStack::create($mock);
 

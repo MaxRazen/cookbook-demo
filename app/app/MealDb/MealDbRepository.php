@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Services\MealDb;
+namespace App\MealDb;
 
-use App\Services\MealDb\Transformers\SearchResultTransformer;
+use App\MealDb\Transformers\SearchResultTransformer;
 use Illuminate\Support\Collection;
 
 class MealDbRepository

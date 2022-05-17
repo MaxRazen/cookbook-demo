@@ -2,7 +2,7 @@
 
 namespace Tests\Feature\MealDb;
 
-use App\Services\MealDb\MealDbApiClient;
+use App\MealDb\MealDbApiClient;
 use GuzzleHttp\Psr7\Response;
 use Tests\Mixins\InteractWithHttpClient;
 use Tests\Mixins\InteractWithMealDbEntities;
@@ -13,7 +13,7 @@ class MealDbApiClientTest extends TestCase
     use InteractWithHttpClient;
     use InteractWithMealDbEntities;
 
-    public function test_performing_success_request(): void
+    public function testPerformingSuccessRequest(): void
     {
         $this->mockHttpClient([
             new Response(200, ['Content-Type' => 'application/json'], json_encode(['meals' => $this->mealsDataProvider()])),
@@ -26,7 +26,7 @@ class MealDbApiClientTest extends TestCase
         $this->assertCount(count($this->mealsDataProvider()), $results);
     }
 
-    public function test_processing_bad_response(): void
+    public function testProcessingBadResponse(): void
     {
         $this->mockHttpClient([
             new Response(400, ['Content-Type' => 'text/html'], json_encode(['meals' => $this->mealsDataProvider()])),

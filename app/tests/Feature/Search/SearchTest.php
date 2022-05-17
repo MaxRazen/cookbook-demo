@@ -16,13 +16,13 @@ class SearchTest extends TestCase
     use InteractWithHttpClient;
     use InteractWithMealDbEntities;
 
-    public function test_search_as_guest(): void
+    public function testSearchAsGuest(): void
     {
         $this->get('/search?q=example')
             ->assertRedirect(route('login'));
     }
 
-    public function test_search_as_user(): void
+    public function testSearchAsUser(): void
     {
         $this->actingAs(User::factory()->create());
 

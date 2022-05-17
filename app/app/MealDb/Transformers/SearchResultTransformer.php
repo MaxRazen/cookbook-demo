@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Services\MealDb\Transformers;
+namespace App\MealDb\Transformers;
 
 use App\Contracts\Transformable;
-use App\Services\MealDb\Data\MealIngredient;
-use App\Services\MealDb\Data\SearchResultItem;
+use App\MealDb\Data\MealIngredient;
+use App\MealDb\Data\SearchResultItem;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
 
