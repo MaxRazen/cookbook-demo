@@ -15,6 +15,24 @@ class MealDbRepositoryTest extends TestCase
 {
     use InteractWithMealDbEntities;
 
+    public function testFind(): void
+    {
+        $this->instance(
+            MealDbApiClient::class,
+            Mockery::mock(MealDbApiClient::class, function (MockInterface $mock): void {
+                $mock->shouldReceive('find')
+                    ->once()
+                    ->andReturn(array_slice($this->mealsDataProvider(), 0, 1));
+            }),
+        );
+
+        $repository = $this->app->make(MealDbRepository::class);
+
+        $result = $repository->find('::id::');
+
+        $this->assertInstanceOf(SearchResultItem::class, $result);
+    }
+
     public function testSearch(): void
     {
         $this->instance(

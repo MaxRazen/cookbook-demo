@@ -11,6 +11,19 @@ use PHPUnit\Framework\TestCase;
 
 class MealDbApiClientTest extends TestCase
 {
+    public function testFind(): void
+    {
+        $responses = [
+            new Response(200, [], json_encode(['meals' => [true]])),
+        ];
+
+        $client = new MealDbApiClient($this->mockHttpClient($responses));
+
+        $result = $client->find('::id::');
+
+        $this->assertEquals([true], $result);
+    }
+
     public function testSearch(): void
     {
         $responses = [

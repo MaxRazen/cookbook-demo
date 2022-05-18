@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\MealFavoriteController;
+use App\Http\Controllers\MealRemoveFavoriteController;
 use App\Http\Controllers\SearchController;
 use Illuminate\Support\Facades\Route;
 
@@ -22,6 +24,11 @@ Route::middleware(['auth'])->group(function (): void {
     Route::view('/dashboard', 'dashboard')->name('dashboard');
     Route::get('/search', SearchController::class)->name('search');
     Route::post('/search', SearchController::class);
+
+    Route::group(['prefix' => 'meals', 'as' => 'meals.'], function (): void {
+        Route::post('{mealId}/favorite', MealFavoriteController::class)->name('favorite');
+        Route::delete('{mealId}/favorite', MealRemoveFavoriteController::class);
+    });
 });
 
 Route::get('/dashboard', function () {

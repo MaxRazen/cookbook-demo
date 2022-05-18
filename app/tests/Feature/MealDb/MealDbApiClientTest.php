@@ -13,7 +13,26 @@ class MealDbApiClientTest extends TestCase
     use InteractWithHttpClient;
     use InteractWithMealDbEntities;
 
-    public function testPerformingSuccessRequest(): void
+    public function testFindRequest(): void
+    {
+        $meal = $this->mealsDataProvider()[0];
+
+        $response = new Response(
+            200,
+            ['Content-Type' => 'application/json'],
+            json_encode(['meals' => [$meal]]),
+        );
+
+        $this->mockHttpClient([$response]);
+
+        $client = $this->app->make(MealDbApiClient::class);
+
+        $result = $client->find($meal['idMeal']);
+
+        $this->assertEquals([$meal], $result);
+    }
+
+    public function testSearchRequest(): void
     {
         $this->mockHttpClient([
             new Response(200, ['Content-Type' => 'application/json'], json_encode(['meals' => $this->mealsDataProvider()])),

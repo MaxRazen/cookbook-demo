@@ -19,6 +19,18 @@ class MealDbRepositoryTest extends TestCase
             ->getMock();
     }
 
+    public function testFind(): void
+    {
+        $this->client
+            ->expects($this->once())
+            ->method('find')
+            ->willReturn([]);
+
+        $repository = new MealDbRepository($this->client);
+
+        $repository->find('::id::');
+    }
+
     public function testSearch(): void
     {
         $this->client
