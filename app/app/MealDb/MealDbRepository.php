@@ -28,13 +28,4 @@ class MealDbRepository
         return (new SearchResultTransformer())
             ->transform(collect($results));
     }
-
-    // TODO: it is probably not needed
-//    public function searchByIds(Collection $mealIds): Collection
-//    {
-//        return $mealIds
-//            ->map(fn (int $mealId) => $this->find($mealId))
-//            ->filter(fn (?SearchResultItem $item) => ! is_null($item))
-//            ->values();
-//    }
 }
