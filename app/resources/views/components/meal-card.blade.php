@@ -1,5 +1,4 @@
 @props(['item'])
-@php($isFavorite = $authenticatedUser->favoriteMeals->pluck('meal_id')->contains($item->id))
 <!-- Column -->
 <div class="my-1 px-1 w-full md:w-1/2 lg:my-4 lg:px-4 lg:w-1/3">
 
@@ -24,8 +23,7 @@
         <footer class="flex items-center justify-between leading-none p-2 md:p-4">
             <p class="text-sm">{{ $item->country }}</p>
 
-            <x-button-favorite :item="$item"
-                               :checked="$isFavorite"></x-button-favorite>
+            <x-button-favorite :item="$item"></x-button-favorite>
         </footer>
 
     </article>

@@ -2,7 +2,7 @@
 
 namespace App\MealDb;
 
-use App\MealDb\Data\SearchResultItem;
+use App\MealDb\Data\MealItemData;
 use App\MealDb\Transformers\SearchResultTransformer;
 use Illuminate\Support\Collection;
 
@@ -12,7 +12,7 @@ class MealDbRepository
     {
     }
 
-    public function find(string $mealId): ?SearchResultItem
+    public function find(string $mealId): ?MealItemData
     {
         $results = $this->client->find($mealId);
 

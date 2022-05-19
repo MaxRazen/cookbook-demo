@@ -2,7 +2,7 @@
 
 namespace Tests\Feature\MealDb;
 
-use App\MealDb\Data\SearchResultItem;
+use App\MealDb\Data\MealItemData;
 use App\MealDb\MealDbApiClient;
 use App\MealDb\MealDbRepository;
 use Illuminate\Support\Collection;
@@ -30,7 +30,7 @@ class MealDbRepositoryTest extends TestCase
 
         $result = $repository->find('::id::');
 
-        $this->assertInstanceOf(SearchResultItem::class, $result);
+        $this->assertInstanceOf(MealItemData::class, $result);
     }
 
     public function testSearch(): void
@@ -49,6 +49,6 @@ class MealDbRepositoryTest extends TestCase
         $result = $repository->search('example');
 
         $this->assertInstanceOf(Collection::class, $result);
-        $this->assertInstanceOf(SearchResultItem::class, $result->first());
+        $this->assertInstanceOf(MealItemData::class, $result->first());
     }
 }
