@@ -3,8 +3,8 @@
 namespace App\MealDb\Transformers;
 
 use App\Contracts\Transformable;
-use App\MealDb\Data\MealIngredient;
-use App\MealDb\Data\SearchResultItem;
+use App\MealDb\Data\MealIngredientData;
+use App\MealDb\Data\MealItemData;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
 
@@ -15,7 +15,7 @@ class SearchResultTransformer implements Transformable
         return $items->map(function (array $item) {
             $ingredients = $this->resolveIngredients($item);
 
-            return new SearchResultItem([
+            return new MealItemData([
                 'id' => Arr::get($item, 'idMeal'),
                 'title' => Arr::get($item, 'strMeal'),
                 'drink' => Arr::get($item, 'strDrinkAlternate'),
@@ -41,7 +41,7 @@ class SearchResultTransformer implements Transformable
             $measure = trim($item[$measureKey.$i] ?? '');
 
             if ($ingredient) {
-                $results[] = new MealIngredient([
+                $results[] = new MealIngredientData([
                     'name' => $ingredient,
                     'measure' => $measure,
                 ]);

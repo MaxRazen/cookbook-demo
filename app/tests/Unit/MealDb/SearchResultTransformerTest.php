@@ -2,8 +2,8 @@
 
 namespace Tests\Unit\MealDb;
 
-use App\MealDb\Data\MealIngredient;
-use App\MealDb\Data\SearchResultItem;
+use App\MealDb\Data\MealIngredientData;
+use App\MealDb\Data\MealItemData;
 use App\MealDb\Transformers\SearchResultTransformer;
 use PHPUnit\Framework\TestCase;
 use Tests\Mixins\InteractWithMealDbEntities;
@@ -20,10 +20,10 @@ class SearchResultTransformerTest extends TestCase
 
         $this->assertEquals(2, $results->count());
 
-        /** @var SearchResultItem $meal1 */
+        /** @var MealItemData $meal1 */
         $meal1 = $results->first();
-        $this->assertInstanceOf(SearchResultItem::class, $meal1);
-        $this->assertInstanceOf(MealIngredient::class, $meal1->ingredients[0]);
+        $this->assertInstanceOf(MealItemData::class, $meal1);
+        $this->assertInstanceOf(MealIngredientData::class, $meal1->ingredients[0]);
         $this->assertEquals('53061', $meal1->id);
         $this->assertNotEmpty($meal1->title);
         $this->assertNotEmpty($meal1->imgUrl);
@@ -32,7 +32,7 @@ class SearchResultTransformerTest extends TestCase
         $this->assertNotEmpty($meal1->ingredients[0]->name);
         $this->assertNotEmpty($meal1->ingredients[0]->measure);
 
-        /** @var SearchResultItem $meal2 */
+        /** @var MealItemData $meal2 */
         $meal2 = $results->last();
         $this->assertEquals('Corba', $meal2->title);
         $this->assertEquals(13, count($meal2->ingredients));

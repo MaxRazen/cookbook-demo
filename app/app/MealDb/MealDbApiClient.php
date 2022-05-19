@@ -12,6 +12,17 @@ class MealDbApiClient
     {
     }
 
+    public function find(string $id): array
+    {
+        $response = $this->request('GET', 'lookup.php', [
+            'query' => [
+                'i' => $id,
+            ],
+        ]);
+
+        return $response['meals'] ?? [];
+    }
+
     public function search(string $searchQuery): array
     {
         $response = $this->request('GET', 'search.php', [

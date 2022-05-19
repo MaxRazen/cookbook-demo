@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Feature\Search;
+namespace Tests\Feature\Http;
 
 use App\Models\User;
 use GuzzleHttp\Psr7\Response;
@@ -10,7 +10,7 @@ use Tests\Mixins\InteractWithHttpClient;
 use Tests\Mixins\InteractWithMealDbEntities;
 use Tests\TestCase;
 
-class SearchTest extends TestCase
+class SearchControllerTest extends TestCase
 {
     use RefreshDatabase;
     use InteractWithHttpClient;

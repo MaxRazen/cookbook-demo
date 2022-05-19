@@ -2,7 +2,7 @@
 
 namespace Tests\Feature\MealDb;
 
-use App\MealDb\Data\SearchResultItem;
+use App\MealDb\Data\MealItemData;
 use App\MealDb\MealDbApiClient;
 use App\MealDb\MealDbRepository;
 use Illuminate\Support\Collection;
@@ -14,6 +14,24 @@ use Tests\TestCase;
 class MealDbRepositoryTest extends TestCase
 {
     use InteractWithMealDbEntities;
+
+    public function testFind(): void
+    {
+        $this->instance(
+            MealDbApiClient::class,
+            Mockery::mock(MealDbApiClient::class, function (MockInterface $mock): void {
+                $mock->shouldReceive('find')
+                    ->once()
+                    ->andReturn(array_slice($this->mealsDataProvider(), 0, 1));
+            }),
+        );
+
+        $repository = $this->app->make(MealDbRepository::class);
+
+        $result = $repository->find('::id::');
+
+        $this->assertInstanceOf(MealItemData::class, $result);
+    }
 
     public function testSearch(): void
     {
@@ -31,6 +49,6 @@ class MealDbRepositoryTest extends TestCase
         $result = $repository->search('example');
 
         $this->assertInstanceOf(Collection::class, $result);
-        $this->assertInstanceOf(SearchResultItem::class, $result->first());
+        $this->assertInstanceOf(MealItemData::class, $result->first());
     }
 }

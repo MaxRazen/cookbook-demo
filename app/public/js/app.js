@@ -5067,6 +5067,45 @@ module.exports = {
 
 /***/ }),
 
+/***/ "./resources/js/alpine/components.js":
+/*!*******************************************!*\
+  !*** ./resources/js/alpine/components.js ***!
+  \*******************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "toggleFavorite": () => (/* binding */ toggleFavorite)
+/* harmony export */ });
+var toggleFavorite = function toggleFavorite() {
+  return {
+    id: null,
+    checked: false,
+    init: function init() {
+      this.id = this.$el.dataset.id;
+      this.checked = !!parseInt(this.$el.dataset.checked || '0');
+    },
+    onClick: function onClick() {
+      var _this = this;
+
+      var endpoint = "/meals/".concat(this.id, "/favorite");
+
+      if (!this.checked) {
+        axios.post(endpoint).then(function () {
+          return _this.checked = true;
+        });
+      } else {
+        axios["delete"](endpoint).then(function () {
+          return _this.checked = false;
+        });
+      }
+    }
+  };
+};
+
+/***/ }),
+
 /***/ "./resources/js/app.js":
 /*!*****************************!*\
   !*** ./resources/js/app.js ***!
@@ -5076,11 +5115,18 @@ module.exports = {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var alpinejs__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! alpinejs */ "./node_modules/alpinejs/dist/module.esm.js");
+/* harmony import */ var _alpine_components__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./alpine/components */ "./resources/js/alpine/components.js");
 __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
 
+
 window.Alpine = alpinejs__WEBPACK_IMPORTED_MODULE_0__["default"];
-alpinejs__WEBPACK_IMPORTED_MODULE_0__["default"].start();
+document.addEventListener('DOMContentLoaded', function () {
+  alpinejs__WEBPACK_IMPORTED_MODULE_0__["default"].start();
+});
+document.addEventListener('alpine:initializing', function () {
+  alpinejs__WEBPACK_IMPORTED_MODULE_0__["default"].data('toggleFavorite', _alpine_components__WEBPACK_IMPORTED_MODULE_1__.toggleFavorite);
+});
 
 /***/ }),
 

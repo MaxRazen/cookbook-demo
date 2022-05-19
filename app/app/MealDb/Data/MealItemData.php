@@ -4,7 +4,7 @@ namespace App\MealDb\Data;
 
 use Spatie\DataTransferObject\DataTransferObject;
 
-class SearchResultItem extends DataTransferObject
+class MealItemData extends DataTransferObject
 {
     public string $id;
 
@@ -22,6 +22,6 @@ class SearchResultItem extends DataTransferObject
 
     public ?string $sourceUrl;
 
-    /** @var array|MealIngredient[] */
+    /** @var array|MealIngredientData[] */
     public array $ingredients = [];
 }

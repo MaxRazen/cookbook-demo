@@ -4,7 +4,7 @@ namespace App\MealDb\Data;
 
 use Spatie\DataTransferObject\DataTransferObject;
 
-class MealIngredient extends DataTransferObject
+class MealIngredientData extends DataTransferObject
 {
     public string $name;
 

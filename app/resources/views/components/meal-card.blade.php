@@ -23,9 +23,7 @@
         <footer class="flex items-center justify-between leading-none p-2 md:p-4">
             <p class="text-sm">{{ $item->country }}</p>
 
-            <a class="no-underline text-stone-500 hover:text-red-700" href="#">
-                <x-icons.like/>
-            </a>
+            <x-button-favorite :item="$item"></x-button-favorite>
         </footer>
 
     </article>

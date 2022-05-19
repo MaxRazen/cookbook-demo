@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\MealItemResource;
 use App\MealDb\MealDbRepository;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
@@ -16,7 +17,7 @@ class SearchController
 
         return view('search', [
             'searchQuery' => $search,
-            'results' => $results,
+            'results' => MealItemResource::collection($results, $request->user()),
         ]);
     }
 }
