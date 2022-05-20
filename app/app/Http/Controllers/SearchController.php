@@ -9,11 +9,11 @@ use Illuminate\View\View;
 
 class SearchController
 {
-    public function __invoke(Request $request): View
+    public function __invoke(Request $request, MealDbRepository $repository): View
     {
         $search = trim($request->get('q', ''));
 
-        $results = app(MealDbRepository::class)->search($search);
+        $results = $repository->search($search);
 
         return view('search', [
             'searchQuery' => $search,
