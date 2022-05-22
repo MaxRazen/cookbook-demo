@@ -34,6 +34,17 @@ class MealDbApiClient
         return $response['meals'] ?? [];
     }
 
+    public function filterByIngredient(string $ingredientName): array
+    {
+        $response = $this->request('GET', 'filter.php', [
+            'query' => [
+                'i' => $ingredientName,
+            ],
+        ]);
+
+        return $response['meals'] ?? [];
+    }
+
     private function request(string $method, string $path, array $options = []): array
     {
         try {

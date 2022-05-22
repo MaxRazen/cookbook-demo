@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Queries\UserQueryBuilder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -42,8 +43,18 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+    public function newEloquentBuilder($query): UserQueryBuilder
+    {
+        return new UserQueryBuilder($query);
+    }
+
     public function favoriteMeals(): HasMany
     {
         return $this->hasMany(FavoriteMeal::class);
+    }
+
+    public function recommendedMeals(): HasMany
+    {
+        return $this->hasMany(RecommendedMeal::class);
     }
 }

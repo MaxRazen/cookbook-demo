@@ -37,6 +37,19 @@ class MealDbApiClientTest extends TestCase
         $this->assertEquals([true], $result);
     }
 
+    public function testFilterByIngredient(): void
+    {
+        $responses = [
+            new Response(200, [], json_encode(['meals' => [true]])),
+        ];
+
+        $client = new MealDbApiClient($this->mockHttpClient($responses));
+
+        $result = $client->filterByIngredient('example');
+
+        $this->assertEquals([true], $result);
+    }
+
     private function mockHttpClient(array $responses): Client
     {
         $mock = new MockHandler($responses);

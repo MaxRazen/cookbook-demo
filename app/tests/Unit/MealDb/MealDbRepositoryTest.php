@@ -4,42 +4,62 @@ namespace Tests\Unit\MealDb;
 
 use App\MealDb\MealDbApiClient;
 use App\MealDb\MealDbRepository;
+use Mockery;
 use PHPUnit\Framework\TestCase;
 
 class MealDbRepositoryTest extends TestCase
 {
-    private $client;
+    private ?MealDbApiClient $client;
 
     protected function setUp(): void
     {
         parent::setUp();
 
-        $this->client = $this->getMockBuilder(MealDbApiClient::class)
-            ->disableOriginalConstructor()
-            ->getMock();
+        $this->client = Mockery::mock(MealDbApiClient::class);
     }
 
     public function testFind(): void
     {
         $this->client
-            ->expects($this->once())
-            ->method('find')
-            ->willReturn([]);
+            ->shouldReceive('find')
+            ->once()
+            ->andReturn([]);
 
         $repository = new MealDbRepository($this->client);
 
         $repository->find('::id::');
+
+        $this->assertTrue(true);
     }
 
     public function testSearch(): void
     {
         $this->client
-            ->expects($this->once())
-            ->method('search')
-            ->willReturn([]);
+            ->shouldReceive('search')
+            ->once()
+            ->andReturn([]);
 
         $repository = new MealDbRepository($this->client);
 
         $repository->search('example');
+
+        $this->assertTrue(true);
+    }
+
+    public function testFilterByIngredient(): void
+    {
+        $this->client
+            ->shouldReceive('filterByIngredient')
+            ->once()
+            ->withArgs(function ($arg) {
+                $this->assertEquals('sea_salt', $arg);
+
+                return true;
+            })
+            ->andReturn([]);
+
+        $repository = new MealDbRepository($this->client);
+
+        $repository->filterByIngredient('Sea Salt');
     }
 }
