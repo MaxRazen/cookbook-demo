@@ -2,10 +2,12 @@
 
 namespace Tests\Feature\Http;
 
+use App\Events\UserFavoriteListChanged;
 use App\Models\FavoriteMeal;
 use App\Models\User;
 use App\Services\MealService;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\Event;
 use Tests\TestCase;
 
 class MealFavoriteControllerTest extends TestCase
@@ -17,6 +19,8 @@ class MealFavoriteControllerTest extends TestCase
     protected function setUp(): void
     {
         parent::setUp();
+
+        Event::fake();
 
         $this->user = User::factory()->create();
 
@@ -37,6 +41,8 @@ class MealFavoriteControllerTest extends TestCase
             ->assertStatus(200);
 
         $this->assertDatabaseCount(FavoriteMeal::class, 2);
+
+        Event::assertDispatched(UserFavoriteListChanged::class);
     }
 
     public function testAddingSameMealToFavorites(): void
@@ -47,5 +53,7 @@ class MealFavoriteControllerTest extends TestCase
             ->assertStatus(200);
 
         $this->assertDatabaseCount(FavoriteMeal::class, 1);
+
+        Event::assertDispatched(UserFavoriteListChanged::class);
     }
 }

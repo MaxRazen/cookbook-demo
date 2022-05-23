@@ -8,9 +8,9 @@ use Illuminate\Http\Request;
 
 class MealFavoriteController
 {
-    public function __invoke(string $mealId, Request $request): JsonResponse
+    public function __invoke(string $mealId, Request $request, MealService $service): JsonResponse
     {
-        app(MealService::class)->favorite($mealId, $request->user());
+        $service->favorite($mealId, $request->user());
 
         return response()->json();
     }

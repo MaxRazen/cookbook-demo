@@ -8,9 +8,9 @@ use Illuminate\Http\Request;
 
 class MealRemoveFavoriteController
 {
-    public function __invoke(string $mealId, Request $request): JsonResponse
+    public function __invoke(string $mealId, Request $request, MealService $service): JsonResponse
     {
-        app(MealService::class)->removeFavorite($mealId, $request->user());
+        $service->removeFavorite($mealId, $request->user());
 
         return response()->json();
     }

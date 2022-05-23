@@ -54,7 +54,7 @@ trait InteractWithMealDbEntities
                 'strIngredient10' => 'Red Pepper Flakes',
                 'strIngredient11' => 'Vegetable Stock',
                 'strIngredient12' => 'Water',
-                'strIngredient13' => 'Sea Salt',
+                'strIngredient13' => 'Salt',
                 'strIngredient14' => '',
                 'strIngredient15' => '',
                 'strMeasure1' => '1 cup ',
