@@ -3,6 +3,8 @@
 namespace App\Providers;
 
 use App\Events\UserFavoriteListChanged;
+use App\Events\UserRecommendationsShouldBeRefreshed;
+use App\Listeners\ConsumeRecommendationListMessage;
 use App\Listeners\ProduceRecommendationListMessage;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
@@ -22,6 +24,9 @@ class EventServiceProvider extends ServiceProvider
         ],
         UserFavoriteListChanged::class => [
             ProduceRecommendationListMessage::class,
+        ],
+        UserRecommendationsShouldBeRefreshed::class => [
+            ConsumeRecommendationListMessage::class,
         ],
     ];
 

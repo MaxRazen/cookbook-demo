@@ -2,6 +2,7 @@
 
 namespace Tests\Feature\MealDb;
 
+use App\MealDb\Data\MealFilterItemData;
 use App\MealDb\Data\MealItemData;
 use App\MealDb\MealDbApiClient;
 use App\MealDb\MealDbRepository;
@@ -50,5 +51,24 @@ class MealDbRepositoryTest extends TestCase
 
         $this->assertInstanceOf(Collection::class, $result);
         $this->assertInstanceOf(MealItemData::class, $result->first());
+    }
+
+    public function testFilterByIngredient(): void
+    {
+        $this->instance(
+            MealDbApiClient::class,
+            Mockery::mock(MealDbApiClient::class, function (MockInterface $mock): void {
+                $mock->shouldReceive('filterByIngredient')
+                    ->once()
+                    ->andReturn($this->mealsDataProvider());
+            }),
+        );
+
+        $repository = $this->app->make(MealDbRepository::class);
+
+        $result = $repository->filterByIngredient('example');
+
+        $this->assertInstanceOf(Collection::class, $result);
+        $this->assertInstanceOf(MealFilterItemData::class, $result->first());
     }
 }

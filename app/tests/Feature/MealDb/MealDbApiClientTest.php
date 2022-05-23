@@ -45,6 +45,19 @@ class MealDbApiClientTest extends TestCase
         $this->assertCount(count($this->mealsDataProvider()), $results);
     }
 
+    public function testFilterByIngredient(): void
+    {
+        $this->mockHttpClient([
+            new Response(200, ['Content-Type' => 'application/json'], json_encode(['meals' => $this->mealsDataProvider()])),
+        ]);
+
+        $client = $this->app->make(MealDbApiClient::class);
+
+        $results = $client->filterByIngredient('example');
+
+        $this->assertCount(count($this->mealsDataProvider()), $results);
+    }
+
     public function testProcessingBadResponse(): void
     {
         $this->mockHttpClient([
