@@ -23,3 +23,4 @@ bash: ## Login into application container
 docker-env: ## Copy .env and prepare for build
 	cp ./docker-environment/.env.example ./docker-environment/.env
 	cp ./docker-environment/nginx/sites/local-cookbook.conf.example ./docker-environment/nginx/sites/local-cookbook.conf
+	cp ./app/.env.example ./app/.env
